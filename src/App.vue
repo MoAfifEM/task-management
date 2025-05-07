@@ -1,85 +1,79 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+    <!-- Global Toast -->
+    <Toast />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- Header -->
+    <header class="bg-white shadow p-4 flex items-center justify-between">
+      <h1 @click="sidebarOpen = true" class="text-xl font-semibold">Nurse Task System</h1>
+      <button class="sm:hidden text-gray-600" @click="sidebarOpen = true">
+        <i class="pi pi-bars text-xl"></i>
+      </button>
+    </header>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <!-- Main Layout -->
+    <div class="flex flex-1">
+      <!-- Sidebar (desktop only) -->
+      <aside class="hidden sm:block w-64 bg-white p-4 shadow-lg">
+        <SidebarLinks />
+      </aside>
+
+      <!-- Page Content -->
+      <main class="flex-1 p-4">
+        <RouterView />
+      </main>
     </div>
-  </header>
 
-  <RouterView />
+    <!-- Sidebar Overlay for Mobile -->
+    <transition name="fade">
+      <div
+        v-if="sidebarOpen"
+        class="fixed inset-0 z-40 bg-black bg-opacity-50 sm:hidden"
+        @click="sidebarOpen = false"
+      ></div>
+    </transition>
+
+    <transition name="slide">
+      <aside
+        v-if="sidebarOpen"
+        class="fixed top-0 left-0 z-50 w-64 h-full bg-white shadow-lg p-4 sm:hidden transition-transform"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold">Menu</h2>
+          <button @click="sidebarOpen = false">
+            <i class="pi pi-times text-xl"></i>
+          </button>
+        </div>
+        <SidebarLinks @link-click="sidebarOpen = false" />
+      </aside>
+    </transition>
+  </div>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import Toast from 'primevue/toast'
+import SidebarLinks from './components/SidebarLinks.vue'
+
+const sidebarOpen = ref(false)
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
 }
 </style>
