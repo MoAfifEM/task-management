@@ -1,4 +1,4 @@
-import type { TaskStatus } from './enums'
+import type { Department, TaskStatus } from './enums'
 export interface Staff {
   id: string
   username: string
@@ -20,7 +20,21 @@ export interface Task {
   id: string
   title: string
   description?: string
-  patientId: string
-  staffId: string
   status: TaskStatus
+}
+
+export interface Workflow {
+  id: string
+  name: string
+  description?: string
+  tasks: Task[]
+  department: Department
+}
+
+export interface Journey {
+  id: string
+  patientId: string
+  workflowId: string
+  status: TaskStatus
+  tasks: Task[]
 }
