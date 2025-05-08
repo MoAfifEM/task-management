@@ -56,9 +56,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Toast from 'primevue/toast'
 import SidebarLinks from './components/SidebarLinks.vue'
+import { useAuthStore } from './stores/authStore'
+import { useProfileStore } from './stores/profileStore'
 
 const sidebarOpen = ref(false)
+
+onMounted(() => {
+  useAuthStore().loadFromStorage()
+  useProfileStore().loadFromStorage()
+})
 </script>

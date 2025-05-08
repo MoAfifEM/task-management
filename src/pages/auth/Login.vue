@@ -38,33 +38,46 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'primevue/usetoast'
-import { staffs } from '../../data/mockData'
+import { useAuthStore } from '../../stores/authStore'
 
 export default {
   name: 'Login',
   setup() {
+    const authStore = useAuthStore()
     const toast = useToast()
     const router = useRouter()
 
     const username = ref('')
     const password = ref('')
 
-    function handleLogin() {
-      const user = staffs.find(
-        (staff) => staff.username === username.value && staff.password === password.value,
-      )
+    const isUserLoggedIn = computed(() => authStore.user !== null)
 
-      if (user) {
+    // Trigger logout when this page is accessed
+    onMounted(() => {
+      if (isUserLoggedIn.value) {
+        authStore.logout() // Call the logout method from your auth store
+        toast.add({
+          severity: 'info',
+          summary: 'Logged Out',
+          detail: 'You have been logged out.',
+          life: 3000,
+        })
+      }
+    })
+
+    const handleLogin = () => {
+      const success = authStore.login(username.value, password.value)
+      if (success) {
         toast.add({
           severity: 'success',
           summary: 'Login Successful',
-          detail: `Welcome back, ${user.name}!`,
+          detail: `Welcome!`,
           life: 3000,
         })
-        router.push('/dashboard')
+        router.push('/dashboard') // Replace with your dashboard route
       } else {
         toast.add({
           severity: 'error',
@@ -72,6 +85,7 @@ export default {
           detail: 'Invalid username or password',
           life: 3000,
         })
+        error.value = 'Invalid username or password'
       }
     }
 

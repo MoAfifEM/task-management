@@ -36,6 +36,6 @@ export interface Journey {
   patientId: string
   workflowId: string
   status: TaskStatus
-  task: Task // current task progress, can be multiple tasks under the workflow and journey
-  staffId: string // staff who is handling the journey on the workflow under the department
+  task: Task
+  staffId: string
 }
