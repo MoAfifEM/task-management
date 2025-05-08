@@ -16,9 +16,24 @@ const router = createRouter({
       component: () => import('../pages/dashboard/Index.vue'),
     },
     {
-      path: '/patient',
-      name: 'patient',
+      path: '/patients',
+      name: 'patients',
       component: () => import('../pages/patients/Index.vue'),
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: () => import('../pages/tasks/Index.vue'),
+    },
+    {
+      path: '/workflows',
+      name: 'workflows',
+      component: () => import('../pages/workflows/Index.vue'),
+    },
+    {
+      path: '/journeys',
+      name: 'journeys',
+      component: () => import('../pages/journeys/Index.vue'),
     },
     {
       path: '/about',
