@@ -1,52 +1,57 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
-    <!-- Global Toast -->
+  <div id="app" class="d-flex flex-column min-vh-100">
+    <!-- Toast (Global) -->
     <Toast />
 
-    <!-- Header -->
-    <header class="bg-white shadow p-4 flex items-center justify-between">
-      <h1 @click="sidebarOpen = true" class="text-xl font-semibold">Nurse Task System</h1>
-      <button class="sm:hidden text-gray-600" @click="sidebarOpen = true">
-        <i class="pi pi-bars text-xl"></i>
-      </button>
+    <!-- Header/Navbar -->
+    <header class="navbar navbar-light bg-light shadow-sm px-3">
+      <div class="container-fluid">
+        <h1 class="navbar-brand mb-0 h4">Nurse Task System</h1>
+        <button class="btn btn-outline-secondary d-sm-none" @click="sidebarOpen = !sidebarOpen">
+          <i class="pi pi-bars"></i>
+        </button>
+      </div>
     </header>
 
-    <!-- Main Layout -->
-    <div class="flex flex-1">
-      <!-- Sidebar (desktop only) -->
-      <aside class="hidden sm:block w-64 bg-white p-4 shadow-lg">
+    <!-- Body Layout -->
+    <div class="container-fluid flex-grow-1 d-flex p-0">
+      <!-- Sidebar (always visible on sm and up) -->
+      <aside
+        class="bg-white border-end p-3 d-none d-sm-block"
+        style="width: 250px; min-height: 100%"
+      >
         <SidebarLinks />
       </aside>
 
+      <!-- Sidebar (offcanvas for mobile) -->
+      <div
+        class="offcanvas offcanvas-start show"
+        tabindex="-1"
+        :class="{ 'd-block': sidebarOpen, 'd-none': !sidebarOpen }"
+        style="width: 250px; z-index: 1045"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button type="button" class="btn-close" @click="sidebarOpen = false"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+          <SidebarLinks @link-click="sidebarOpen = false" />
+        </div>
+      </div>
+
+      <!-- Overlay backdrop on mobile -->
+      <div
+        v-if="sidebarOpen"
+        class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-sm-none"
+        style="z-index: 1040"
+        @click="sidebarOpen = false"
+      ></div>
+
       <!-- Page Content -->
-      <main class="flex-1 p-4">
+      <main class="flex-grow-1 p-4">
         <RouterView />
       </main>
     </div>
-
-    <!-- Sidebar Overlay for Mobile -->
-    <transition name="fade">
-      <div
-        v-if="sidebarOpen"
-        class="fixed inset-0 z-40 bg-black bg-opacity-50 sm:hidden"
-        @click="sidebarOpen = false"
-      ></div>
-    </transition>
-
-    <transition name="slide">
-      <aside
-        v-if="sidebarOpen"
-        class="fixed top-0 left-0 z-50 w-64 h-full bg-white shadow-lg p-4 sm:hidden transition-transform"
-      >
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg font-semibold">Menu</h2>
-          <button @click="sidebarOpen = false">
-            <i class="pi pi-times text-xl"></i>
-          </button>
-        </div>
-        <SidebarLinks @link-click="sidebarOpen = false" />
-      </aside>
-    </transition>
   </div>
 </template>
 
@@ -57,23 +62,3 @@ import SidebarLinks from './components/SidebarLinks.vue'
 
 const sidebarOpen = ref(false)
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease;
-}
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateX(-100%);
-}
-</style>

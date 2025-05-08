@@ -1,41 +1,40 @@
 <template>
-  <nav class="space-y-2">
+  <nav class="nav flex-column">
     <RouterLink
       to="/dashboard"
-      class="block p-2 rounded hover:bg-blue-100"
-      active-class="bg-blue-200 font-semibold"
+      class="nav-link"
+      active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
-      <i class="pi pi-home mr-2" /> Dashboard
+      <i class="pi pi-home me-2" /> Dashboard
     </RouterLink>
     <RouterLink
       to="/patient"
-      class="block p-2 rounded hover:bg-blue-100"
-      active-class="bg-blue-200 font-semibold"
+      class="nav-link"
+      active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
-      <i class="pi pi-users mr-2" /> Patients
+      <i class="pi pi-users me-2" /> Patients
     </RouterLink>
     <!-- <RouterLink
       to="/staff"
-      class="block p-2 rounded hover:bg-blue-100"
-      active-class="bg-blue-200 font-semibold"
+      class="nav-link"
+      active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
-      <i class="pi pi-user mr-2" /> Staff
+      <i class="pi pi-user me-2" /> Staff
     </RouterLink>
     <RouterLink
       to="/tasks"
-      class="block p-2 rounded hover:bg-blue-100"
-      active-class="bg-blue-200 font-semibold"
+      class="nav-link"
+      active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
-      <i class="pi pi-list-check mr-2" /> Tasks
+      <i class="pi pi-list-check me-2" /> Tasks
     </RouterLink> -->
   </nav>
 </template>
 
 <script setup lang="ts">
-// Emits: link-click (to close the sidebar on mobile)
 defineEmits(['link-click'])
 </script>

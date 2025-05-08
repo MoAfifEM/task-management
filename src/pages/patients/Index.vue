@@ -1,34 +1,32 @@
 <template>
-  <div class="p-4 md:p-6">
-    <h1 class="text-2xl md:text-3xl font-bold mb-4">Patients</h1>
-    <div class="max-h-[70vh] overflow-y-auto space-y-4">
-      <div
-        v-for="(patient, index) in data"
-        :key="index"
-        class="border p-4 rounded-lg shadow bg-white m-4"
-      >
-        <div class="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-          <div class="flex items-center p-4">
-            <img
-              :src="avatar"
-              alt="Avatar"
-              class="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
-            />
-            <div class="ml-4">
-              <h2 class="text-lg font-semibold text-gray-800">{{ patient.fullName }}</h2>
-              <p class="text-sm text-gray-600">{{ patient.identityNo }}</p>
+  <div class="container-fluid vh-100 d-flex flex-column">
+    <h4 class="mb-3">Patient List</h4>
+
+    <!-- Scrollable container for patient cards -->
+    <div class="flex-grow-1 overflow-auto">
+      <div class="row g-3">
+        <div class="col-12 col-md-6 col-lg-4 mb-3" v-for="patient in data" :key="patient.id">
+          <div
+            class="card shadow-sm h-100 d-flex flex-row align-items-center justify-content-between p-3"
+          >
+            <!-- Patient info -->
+            <div class="d-flex align-items-center">
+              <img
+                :src="avatar"
+                alt="Avatar"
+                class="rounded-circle me-3"
+                style="width: 50px; height: 50px; object-fit: cover"
+              />
+              <div>
+                <h6 class="mb-0">{{ patient.fullName }}</h6>
+                <small class="text-muted">{{ patient.contactNo }}</small>
+              </div>
             </div>
-          </div>
-          <div class="p-4 border-t border-gray-200">
-            <p class="text-sm text-gray-600">
-              <span class="font-semibold">Date of Birth:</span> {{ patient.birthDate }}
-            </p>
-            <p class="text-sm text-gray-600 mt-2">
-              <span class="font-semibold">Contact:</span> {{ patient.contactNo }}
-            </p>
-            <p class="text-sm text-gray-600 mt-2">
-              <span class="font-semibold">Address:</span> {{ patient.address }}
-            </p>
+
+            <!-- Action button -->
+            <button class="btn btn-outline-primary btn-sm ms-3" @click="viewDetails(patient)">
+              View
+            </button>
           </div>
         </div>
       </div>
@@ -36,9 +34,16 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { patients } from '@/data/mockData'
 
-const data = ref(patients) // Using mock data from mockData.ts
+const avatar =
+  'https://cdna.artstation.com/p/assets/images/images/038/652/346/large/joe-parente-joji-pink-guy-comp-01.jpg?1623691200' // Placeholder avatar URL
+
+const data = ref(patients)
+
+function viewDetails(patient: Patient) {
+  alert(`Viewing details for ${patient.fullName}`)
+}
 </script>

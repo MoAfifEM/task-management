@@ -1,45 +1,38 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="w-full max-w-sm p-8 bg-white rounded-lg shadow-lg">
-      <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Login</h1>
-      <form @submit.prevent="handleLogin" class="space-y-6">
-        <div>
-          <label for="username" class="block text-sm font-medium text-gray-700 mb-2"
-            >Username</label
-          >
-          <input
-            type="text"
-            id="username"
-            v-model="username"
-            placeholder="Enter your username"
-            class="w-full px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 mb-2"
-            >Password</label
-          >
-          <input
-            type="password"
-            id="password"
-            v-model="password"
-            placeholder="Enter your password"
-            class="w-full px-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Login
-        </button>
-      </form>
-      <p class="mt-6 text-sm text-center text-gray-600">
-        Don't have an account?
-        <a href="/register" class="text-blue-500 hover:underline">Register here</a>
-      </p>
+  <div class="d-flex align-items-center justify-content-center vh-100 bg-light">
+    <div class="card shadow-sm" style="max-width: 400px; width: 100%">
+      <div class="card-body p-4">
+        <h1 class="text-center mb-4">Login</h1>
+        <form @submit.prevent="handleLogin">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              id="username"
+              v-model="username"
+              placeholder="Enter your username"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              v-model="password"
+              placeholder="Enter your password"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+        <p class="text-center mt-3">
+          Don't have an account?
+          <a href="/register" class="text-primary">Register here</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
