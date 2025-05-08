@@ -1,6 +1,6 @@
 <template>
   <div class="container py-4">
-    <h1 class="mb-4 text-center">Journey Management</h1>
+    <h1 class="mb-4 text-center">Journey</h1>
 
     <!-- Scrollable Patient List -->
     <div class="list-group">

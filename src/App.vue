@@ -48,7 +48,7 @@
       ></div>
 
       <!-- Page Content -->
-      <main class="flex-grow-1 overflow-auto p-3">
+      <main class="flex-grow-1 p-4 overflow-auto p-3 p-sm-4">
         <RouterView />
       </main>
     </div>
