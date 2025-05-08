@@ -2,26 +2,33 @@ import { Department, TaskStatus } from '../types/enums'
 import type { Staff, Patient, Task, Workflow, Journey } from '../types/models'
 
 // --- Staff ---
-export const staffList: Staff[] = [
+export const staffs: Staff[] = [
   {
     id: 'staff-001',
     username: 'alice.nurse',
-    password: 'password123',
+    password: 'admin123',
     name: 'Alice Tan',
     contactNo: '+60123456789',
   },
   {
     id: 'staff-002',
     username: 'bob.physio',
-    password: 'password123',
+    password: 'admin123',
     name: 'Bob Lee',
     contactNo: '+60198765432',
   },
   {
     id: 'staff-003',
     username: 'chloe.radio',
-    password: 'password123',
+    password: 'admin123',
     name: 'Chloe Lim',
+    contactNo: '+60199887766',
+  },
+  {
+    id: 'admin-001',
+    username: 'admin',
+    password: 'admin',
+    name: 'Mo Afif',
     contactNo: '+60199887766',
   },
 ]
