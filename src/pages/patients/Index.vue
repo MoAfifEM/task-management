@@ -5,11 +5,32 @@
       <div
         v-for="(patient, index) in data"
         :key="index"
-        class="border p-4 rounded-lg shadow bg-white"
+        class="border p-4 rounded-lg shadow bg-white m-4"
       >
-        <h2 class="text-lg md:text-xl font-semibold">{{ patient.fullName }}</h2>
-        <p class="text-sm md:text-base text-gray-600">Username: {{ patient.username }}</p>
-        <p class="text-sm md:text-base text-gray-600">Phone: {{ patient.contactNo }}</p>
+        <div class="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+          <div class="flex items-center p-4">
+            <img
+              :src="avatar"
+              alt="Avatar"
+              class="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+            />
+            <div class="ml-4">
+              <h2 class="text-lg font-semibold text-gray-800">{{ patient.fullName }}</h2>
+              <p class="text-sm text-gray-600">{{ patient.identityNo }}</p>
+            </div>
+          </div>
+          <div class="p-4 border-t border-gray-200">
+            <p class="text-sm text-gray-600">
+              <span class="font-semibold">Date of Birth:</span> {{ patient.birthDate }}
+            </p>
+            <p class="text-sm text-gray-600 mt-2">
+              <span class="font-semibold">Contact:</span> {{ patient.contactNo }}
+            </p>
+            <p class="text-sm text-gray-600 mt-2">
+              <span class="font-semibold">Address:</span> {{ patient.address }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
