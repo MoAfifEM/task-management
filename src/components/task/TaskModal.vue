@@ -20,8 +20,8 @@
               <label class="form-label">Status</label>
               <select v-model="form.status" class="form-control">
                 <option :value="status.PENDING">Pending</option>
-                <option :value="status.COMPLETED">Completed</option>
                 <option :value="status.IN_PROGRESS">In Progress</option>
+                <option :value="status.DONE">Done</option>
               </select>
             </div>
           </div>
