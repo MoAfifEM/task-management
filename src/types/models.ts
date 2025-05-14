@@ -5,6 +5,7 @@ export interface Staff {
   password: string
   name: string
   contactNo: string
+  department: Department
 }
 
 export interface Patient {

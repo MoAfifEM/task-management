@@ -9,6 +9,7 @@ export const staffs: Staff[] = [
     password: 'admin123',
     name: 'Alice Tan',
     contactNo: '+60123456789',
+    department: Department.NURSING,
   },
   {
     id: 'staff-002',
@@ -16,6 +17,7 @@ export const staffs: Staff[] = [
     password: 'admin123',
     name: 'Bob Lee',
     contactNo: '+60198765432',
+    department: Department.PHYSIOTHERAPY,
   },
   {
     id: 'staff-003',
@@ -23,6 +25,7 @@ export const staffs: Staff[] = [
     password: 'admin123',
     name: 'Chloe Lim',
     contactNo: '+60199887766',
+    department: Department.RADIOLOGY,
   },
   {
     id: 'admin-001',
@@ -30,6 +33,7 @@ export const staffs: Staff[] = [
     password: 'admin',
     name: 'Mo Afif',
     contactNo: '+60199887766',
+    department: Department.ADMINISTRATION,
   },
 ]
 
