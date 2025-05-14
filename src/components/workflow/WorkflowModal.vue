@@ -9,12 +9,38 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label class="form-label">Workflow Name</label>
-              <input v-model="form.name" type="text" class="form-control" required />
+              <label for="workflowName" class="form-label">Workflow Name</label>
+              <input
+                id="workflowName"
+                v-model="form.name"
+                type="text"
+                class="form-control"
+                placeholder="Enter workflow name"
+                required
+              />
             </div>
             <div class="mb-3">
-              <label class="form-label">Step</label>
-              <input v-model="form.step" type="text" class="form-control" required />
+              <label for="workflowDescription" class="form-label">Description</label>
+              <textarea
+                id="workflowDescription"
+                v-model="form.description"
+                class="form-control"
+                placeholder="Enter workflow description"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="workflowDepartment" class="form-label">Department</label>
+              <select
+                id="workflowDepartment"
+                v-model="form.department"
+                class="form-select"
+                required
+              >
+                <option value="" disabled>Select a department</option>
+                <option value="HR">HR</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Marketing">Marketing</option>
+              </select>
             </div>
           </div>
           <div class="modal-footer">
@@ -31,12 +57,9 @@
 
 <script setup lang="ts">
 import { reactive, computed, watch } from 'vue'
-
-interface Workflow {
-  id?: string
-  name: string
-  step: string
-}
+import type { Workflow } from '../../types/models'
+import type { Department } from '@/types/enums'
+import { tasks as tasksDropdown } from '../../data/mockData'
 
 const props = defineProps<{
   initialData: Workflow | null
@@ -48,8 +71,11 @@ const emit = defineEmits<{
 }>()
 
 const form = reactive<Workflow>({
+  id: `workflow-${Date.now()}`,
   name: '',
-  step: '',
+  description: '',
+  tasks: [],
+  department: '' as Department,
 })
 
 const isEditMode = computed(() => !!props.initialData?.id)
@@ -59,10 +85,14 @@ watch(
   (data) => {
     if (data) {
       form.name = data.name
-      form.step = data.step
+      form.description = data.description || ''
+      form.tasks = data.tasks
+      form.department = data.department
     } else {
       form.name = ''
-      form.step = ''
+      form.description = ''
+      form.tasks = []
+      form.department = '' as Department
     }
   },
   { immediate: true },
@@ -71,7 +101,7 @@ watch(
 function submitForm() {
   const result: Workflow = {
     ...form,
-    id: props.initialData?.id,
+    id: props.initialData?.id || form.id,
   }
   emit('save', result)
 }

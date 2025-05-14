@@ -28,6 +28,30 @@ export const staffs: Staff[] = [
     department: Department.RADIOLOGY,
   },
   {
+    id: 'staff-004',
+    username: 'david.cardiology',
+    password: 'admin123',
+    name: 'David Wong',
+    contactNo: '+60123456788',
+    department: Department.CARDIOLOGY,
+  },
+  {
+    id: 'staff-005',
+    username: 'emma.dermatology',
+    password: 'admin123',
+    name: 'Emma Tan',
+    contactNo: '+60134567891',
+    department: Department.DERMATOLOGY,
+  },
+  {
+    id: 'staff-006',
+    username: 'fiona.gynecology',
+    password: 'admin123',
+    name: 'Fiona Lee',
+    contactNo: '+60145678902',
+    department: Department.GYNECOLOGY,
+  },
+  {
     id: 'admin-001',
     username: 'admin',
     password: 'admin',
@@ -127,26 +151,49 @@ export const tasks: Task[] = [
     id: 'task-001',
     title: 'Check Vital Signs',
     description: 'Monitor and record temperature, pulse, and blood pressure.',
+    department: Department.NURSING,
   },
   {
     id: 'task-002',
     title: 'Wound Dressing',
     description: 'Clean and dress surgical wound.',
+    department: Department.NURSING,
   },
   {
     id: 'task-003',
     title: 'Stretching Exercise',
     description: 'Assisted stretching to improve range of motion.',
+    department: Department.PHYSIOTHERAPY,
   },
   {
     id: 'task-004',
     title: 'Muscle Strength Training',
     description: 'Exercises focused on rebuilding muscle strength.',
+    department: Department.PHYSIOTHERAPY,
   },
   {
     id: 'task-005',
     title: 'X-ray Scan',
     description: 'Chest and abdomen X-ray.',
+    department: Department.RADIOLOGY,
+  },
+  {
+    id: 'task-006',
+    title: 'Cardiac Stress Test',
+    description: 'Monitor heart activity during physical exertion.',
+    department: Department.CARDIOLOGY,
+  },
+  {
+    id: 'task-007',
+    title: 'Skin Allergy Test',
+    description: 'Identify allergic reactions to various substances.',
+    department: Department.DERMATOLOGY,
+  },
+  {
+    id: 'task-008',
+    title: 'Prenatal Ultrasound',
+    description: 'Monitor fetal development and maternal health.',
+    department: Department.GYNECOLOGY,
   },
 ]
 
@@ -156,22 +203,25 @@ export const workflows: Workflow[] = [
     id: 'workflow-001',
     name: 'Post-Surgery Care',
     description: 'Follow-up nursing tasks after surgery',
-    department: Department.NURSING,
     tasks: [tasks[0], tasks[1]],
   },
   {
     id: 'workflow-002',
     name: 'Rehabilitation Program',
     description: 'Daily physiotherapy sessions',
-    department: Department.PHYSIOTHERAPY,
     tasks: [tasks[2], tasks[3]],
   },
   {
     id: 'workflow-003',
     name: 'Radiology Checkup',
     description: 'Routine imaging procedures',
-    department: Department.RADIOLOGY,
     tasks: [tasks[4]],
+  },
+  {
+    id: 'workflow-004',
+    name: 'Specialized Care',
+    description: 'Comprehensive care involving cardiology, dermatology, and gynecology',
+    tasks: [tasks[5], tasks[6], tasks[7]],
   },
 ]
 
@@ -181,10 +231,12 @@ export const journeys: Journey[] = [
     id: 'journey-001',
     patientId: 'patient-001',
     workflowId: 'workflow-001',
-    status: TaskStatus.IN_PROGRESS,
+    status: TaskStatus.DONE,
     task: {
       id: 'task-001',
       title: 'Check Vital Signs',
+      description: 'Monitor and record temperature, pulse, and blood pressure.',
+      department: Department.NURSING,
     },
     staffId: 'staff-001', // Alice from NURSING
   },
@@ -196,29 +248,61 @@ export const journeys: Journey[] = [
     task: {
       id: 'task-002',
       title: 'Wound Dressing',
+      description: 'Clean and dress surgical wound.',
+      department: Department.NURSING,
     },
-    staffId: 'staff-001',
+    staffId: 'staff-001', // Alice from NURSING
   },
   {
     id: 'journey-003',
     patientId: 'patient-002',
     workflowId: 'workflow-002',
-    status: TaskStatus.PENDING,
+    status: TaskStatus.DONE,
     task: {
       id: 'task-003',
       title: 'Stretching Exercise',
+      description: 'Assisted stretching to improve range of motion.',
+      department: Department.PHYSIOTHERAPY,
     },
     staffId: 'staff-002', // Bob from PHYSIOTHERAPY
   },
   {
     id: 'journey-004',
     patientId: 'patient-002',
+    workflowId: 'workflow-002',
+    status: TaskStatus.PENDING,
+    task: {
+      id: 'task-004',
+      title: 'Muscle Strength Training',
+      description: 'Exercises focused on rebuilding muscle strength.',
+      department: Department.PHYSIOTHERAPY,
+    },
+    staffId: 'staff-002', // Bob from PHYSIOTHERAPY
+  },
+  {
+    id: 'journey-005',
+    patientId: 'patient-002',
     workflowId: 'workflow-003',
     status: TaskStatus.PENDING,
     task: {
       id: 'task-005',
       title: 'X-ray Scan',
+      description: 'Chest and abdomen X-ray.',
+      department: Department.RADIOLOGY,
     },
     staffId: 'staff-003', // Chloe from RADIOLOGY
+  },
+  {
+    id: 'journey-006',
+    patientId: 'patient-003',
+    workflowId: 'workflow-004',
+    status: TaskStatus.PENDING,
+    task: {
+      id: 'task-006',
+      title: 'Cardiac Stress Test',
+      description: 'Monitor heart activity during physical exertion.',
+      department: Department.CARDIOLOGY,
+    },
+    staffId: 'staff-004', // David Wong from CARDIOLOGY
   },
 ]

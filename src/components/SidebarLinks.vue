@@ -18,7 +18,6 @@
     </RouterLink>
     <RouterLink
       to="/tasks"
-      å
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
@@ -27,7 +26,6 @@
     </RouterLink>
     <RouterLink
       to="/workflows"
-      å
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
@@ -36,29 +34,44 @@
     </RouterLink>
     <RouterLink
       to="/journeys"
-      å
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
       <i class="pi pi-users me-2" /> Journeys
     </RouterLink>
-    <!-- <RouterLink
-      to="/staff"
-      class="nav-link"
-      active-class="fw-bold text-primary"
-      @click="$emit('link-click')"
-    >
-      <i class="pi pi-user me-2" /> Staff
-    </RouterLink>
-    <RouterLink
-      to="/tasks"
-      class="nav-link"
-      active-class="fw-bold text-primary"
-      @click="$emit('link-click')"
-    >
-      <i class="pi pi-list-check me-2" /> Tasks
-    </RouterLink> -->
+
+    <!-- Dropdown for Staff -->
+    <div class="nav-item dropdown">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="staffDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="pi pi-user me-2" /> Staff
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="staffDropdown">
+        <li>
+          <RouterLink to="/staff/plans" class="dropdown-item" @click="$emit('link-click')">
+            Plans
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/staff/tasks" class="dropdown-item" @click="$emit('link-click')">
+            Tasks
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/staff/journeys" class="dropdown-item" @click="$emit('link-click')">
+            Journeys
+          </RouterLink>
+        </li>
+      </ul>
+    </div>
+
     <RouterLink
       to="/login"
       class="nav-link"

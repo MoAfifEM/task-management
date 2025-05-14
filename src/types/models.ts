@@ -21,6 +21,7 @@ export interface Task {
   id: string
   title: string
   description?: string
+  department: Department
 }
 
 export interface Workflow {
@@ -28,7 +29,6 @@ export interface Workflow {
   name: string
   description?: string
   tasks: Task[]
-  department: Department
 }
 
 export interface Journey {
