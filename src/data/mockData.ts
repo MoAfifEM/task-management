@@ -123,31 +123,26 @@ export const tasks: Task[] = [
     id: 'task-001',
     title: 'Check Vital Signs',
     description: 'Monitor and record temperature, pulse, and blood pressure.',
-    status: TaskStatus.PENDING,
   },
   {
     id: 'task-002',
     title: 'Wound Dressing',
     description: 'Clean and dress surgical wound.',
-    status: TaskStatus.PENDING,
   },
   {
     id: 'task-003',
     title: 'Stretching Exercise',
     description: 'Assisted stretching to improve range of motion.',
-    status: TaskStatus.PENDING,
   },
   {
     id: 'task-004',
     title: 'Muscle Strength Training',
     description: 'Exercises focused on rebuilding muscle strength.',
-    status: TaskStatus.PENDING,
   },
   {
     id: 'task-005',
     title: 'X-ray Scan',
     description: 'Chest and abdomen X-ray.',
-    status: TaskStatus.PENDING,
   },
 ]
 
@@ -186,7 +181,6 @@ export const journeys: Journey[] = [
     task: {
       id: 'task-001',
       title: 'Check Vital Signs',
-      status: TaskStatus.DONE,
     },
     staffId: 'staff-001', // Alice from NURSING
   },
@@ -194,11 +188,10 @@ export const journeys: Journey[] = [
     id: 'journey-002',
     patientId: 'patient-001',
     workflowId: 'workflow-001',
-    status: TaskStatus.IN_PROGRESS,
+    status: TaskStatus.PENDING,
     task: {
       id: 'task-002',
       title: 'Wound Dressing',
-      status: TaskStatus.IN_PROGRESS,
     },
     staffId: 'staff-001',
   },
@@ -210,7 +203,6 @@ export const journeys: Journey[] = [
     task: {
       id: 'task-003',
       title: 'Stretching Exercise',
-      status: TaskStatus.PENDING,
     },
     staffId: 'staff-002', // Bob from PHYSIOTHERAPY
   },
@@ -222,7 +214,6 @@ export const journeys: Journey[] = [
     task: {
       id: 'task-005',
       title: 'X-ray Scan',
-      status: TaskStatus.PENDING,
     },
     staffId: 'staff-003', // Chloe from RADIOLOGY
   },

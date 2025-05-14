@@ -59,21 +59,56 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { patients, workflows } from '../../data/mockData'
+import { patients, workflows, journeys, staffs } from '../../data/mockData'
 import type { Workflow } from '../../types/models'
 import type { Patient } from '../../types/models'
+import type { Journey } from '../../types/models'
+import { useWorkflowStore } from '../../stores/workflowStore'
+import { TaskStatus } from '@/types/enums'
+import { useRouter } from 'vue-router'
 
 const avatar =
   'https://cdna.artstation.com/p/assets/images/images/038/652/346/large/joe-parente-joji-pink-guy-comp-01.jpg?1623691200' // Placeholder avatar URL
 
 const data = ref(patients)
 const selectedWorkflow = ref<Workflow | null>(null)
+const router = useRouter()
 
 function viewDetails(patient: Patient) {
   alert(`Viewing details for ${patient.fullName}`)
 }
 
+const workflowStore = useWorkflowStore()
+
 function selectWorkflow(patient: Patient, workflow: Workflow) {
+  // check if patient is already in the journey
+  const existingJourney = journeys.find((journey) => journey.patientId === patient.id)
+  if (existingJourney) {
+    alert(`Patient ${patient.fullName} is already in the workflow ${workflow.name}`)
+    return
+  }
+
+  // Create a journey for each task in the workflow
+  workflow.tasks.forEach((task) => {
+    // Randomly pick a staff member for each task
+    const randomStaff = staffs[Math.floor(Math.random() * staffs.length)]
+
+    const newJourney: Journey = {
+      id: `journey-${Date.now()}-${task.id}`, // Unique ID for each journey
+      patientId: patient.id,
+      workflowId: workflow.id,
+      status: TaskStatus.PENDING,
+      task: task, // Assign the current task
+      staffId: randomStaff.id, // Assign a randomly selected staff
+    }
+
+    journeys.push(newJourney) // Add the new journey to the journeys array
+  })
+
   alert(`Viewing details for ${patient.fullName} with workflow ${workflow.name}`)
+
+  // workflowStore.selectWorkflow(workflow, patient.id)
+  console.log('Journeys:', journeys)
+  router.push({ name: 'journeys' })
 }
 </script>
