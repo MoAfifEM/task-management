@@ -1,15 +1,15 @@
 <template>
   <nav class="nav flex-column">
-    <RouterLink
+    <!-- <RouterLink
       to="/dashboard"
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
       <i class="pi pi-home me-2" /> Dashboard
-    </RouterLink>
+    </RouterLink> -->
     <RouterLink
-      to="/patients"
+      to="/staff/patients"
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
@@ -17,23 +17,23 @@
       <i class="pi pi-users me-2" /> Patients
     </RouterLink>
     <RouterLink
-      to="/tasks"
+      to="/staff/tasks"
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
       <i class="pi pi-users me-2" /> Tasks
     </RouterLink>
-    <RouterLink
+    <!-- <RouterLink
       to="/workflows"
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
     >
       <i class="pi pi-users me-2" /> Workflows
-    </RouterLink>
+    </RouterLink> -->
     <RouterLink
-      to="/journeys"
+      to="/staff/journeys"
       class="nav-link"
       active-class="fw-bold text-primary"
       @click="$emit('link-click')"
@@ -42,7 +42,7 @@
     </RouterLink>
 
     <!-- Dropdown for Staff -->
-    <div class="nav-item dropdown">
+    <!-- <div class="nav-item dropdown">
       <a
         class="nav-link dropdown-toggle"
         href="#"
@@ -75,7 +75,7 @@
           </RouterLink>
         </li>
       </ul>
-    </div>
+    </div> -->
 
     <RouterLink
       to="/login"

@@ -4,7 +4,7 @@
     <Toast />
 
     <!-- Mobile Layout -->
-    <template v-if="isStaffPage && isMobile">
+    <template v-if="isStaffPage">
       <header class="navbar navbar-light bg-light shadow-sm px-3">
         <div class="container-fluid">
           <h1 class="navbar-brand mb-0 h4">Staff Management</h1>
@@ -41,6 +41,16 @@
 
         <!-- Page Content -->
         <main class="flex-grow-1 d-flex flex-column" style="overflow: hidden">
+          <RouterView />
+        </main>
+      </div>
+    </template>
+
+    <!-- V2 Layout -->
+    <template v-else-if="isV2Page">
+      <div class="v2-layout">
+        <BottomTabBar />
+        <main class="v2-content">
           <RouterView />
         </main>
       </div>
@@ -112,21 +122,50 @@ import Toast from 'primevue/toast'
 import SidebarLinks from './components/SidebarLinks.vue'
 import { useAuthStore } from './stores/authStore'
 import { useProfileStore } from './stores/profileStore'
+import BottomTabBar from './components/BottomTabBar.vue'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
 
 // Add routes that should not show layout (e.g., login, register)
-const noLayoutRoutes = ['/login']
+const noLayoutRoutes = ['/login', '/dashboard']
 const isAuthPage = computed(() => noLayoutRoutes.includes(route.path))
 
 // Check if the current route is under staff/*
 const isStaffPage = computed(() => route.path.startsWith('/staff'))
-// Simulate mobile detection (replace with actual logic if needed)
-const isMobile = true
+const isV2Page = computed(() => route.path.startsWith('/v2'))
 
 onMounted(() => {
   useAuthStore().loadFromStorage()
   useProfileStore().loadFromStorage()
 })
 </script>
+
+<style>
+/* #app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} */
+.v2-layout {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #2a5f95;
+  position: relative;
+}
+.v2-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  /* Add bottom padding equal to tab bar height (56px) to prevent content being hidden */
+  padding-bottom: 56px;
+}
+@media (min-width: 576px) {
+  .v2-layout,
+  .v2-content {
+    height: auto;
+    padding-bottom: 0;
+  }
+}
+</style>
