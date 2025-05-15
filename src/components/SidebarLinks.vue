@@ -69,6 +69,11 @@
             Journeys
           </RouterLink>
         </li>
+        <li>
+          <RouterLink to="/staff/patients" class="dropdown-item" @click="$emit('link-click')">
+            Patients
+          </RouterLink>
+        </li>
       </ul>
     </div>
 

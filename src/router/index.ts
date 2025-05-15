@@ -59,6 +59,12 @@ const router = createRouter({
       component: () => import('../pages/staff/Journey.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/staff/patients',
+      name: 'staffPatients',
+      component: () => import('../pages/patients/Index.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

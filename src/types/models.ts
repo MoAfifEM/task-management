@@ -38,4 +38,6 @@ export interface Journey {
   status: TaskStatus
   task: Task
   staffId: string
+  createdAt: string
+  completedAt?: string
 }

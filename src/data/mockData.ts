@@ -239,6 +239,8 @@ export const journeys: Journey[] = [
       department: Department.NURSING,
     },
     staffId: 'staff-001', // Alice from NURSING
+    createdAt: '2025-05-01T08:00:00Z',
+    completedAt: '2025-05-01T09:00:00Z',
   },
   {
     id: 'journey-002',
@@ -252,6 +254,7 @@ export const journeys: Journey[] = [
       department: Department.NURSING,
     },
     staffId: 'staff-001', // Alice from NURSING
+    createdAt: '2025-05-02T10:00:00Z',
   },
   {
     id: 'journey-003',
@@ -265,6 +268,8 @@ export const journeys: Journey[] = [
       department: Department.PHYSIOTHERAPY,
     },
     staffId: 'staff-002', // Bob from PHYSIOTHERAPY
+    createdAt: '2025-05-03T11:00:00Z',
+    completedAt: '2025-05-03T12:00:00Z',
   },
   {
     id: 'journey-004',
@@ -278,10 +283,11 @@ export const journeys: Journey[] = [
       department: Department.PHYSIOTHERAPY,
     },
     staffId: 'staff-002', // Bob from PHYSIOTHERAPY
+    createdAt: '2025-05-04T13:00:00Z',
   },
   {
     id: 'journey-005',
-    patientId: 'patient-002',
+    patientId: 'patient-003',
     workflowId: 'workflow-003',
     status: TaskStatus.PENDING,
     task: {
@@ -291,10 +297,11 @@ export const journeys: Journey[] = [
       department: Department.RADIOLOGY,
     },
     staffId: 'staff-003', // Chloe from RADIOLOGY
+    createdAt: '2025-05-05T14:00:00Z',
   },
   {
     id: 'journey-006',
-    patientId: 'patient-003',
+    patientId: 'patient-004',
     workflowId: 'workflow-004',
     status: TaskStatus.PENDING,
     task: {
@@ -304,5 +311,6 @@ export const journeys: Journey[] = [
       department: Department.CARDIOLOGY,
     },
     staffId: 'staff-004', // David Wong from CARDIOLOGY
+    createdAt: '2025-05-06T15:00:00Z',
   },
 ]

@@ -1,6 +1,6 @@
 <template>
   <div class="journey container-fluid py-4">
-    <h1 class="mb-4">Journey</h1>
+    <h1 class="mb-4">Journey Progress</h1>
 
     <!-- Scrollable Journeys Container -->
     <div class="journeys-container overflow-auto" style="max-height: 70vh">
@@ -27,6 +27,10 @@
               <h6 class="task-title mb-2">{{ task.title }}</h6>
               <p class="text-muted mb-1">Task ID: {{ task.id }}</p>
               <p class="text-muted mb-1">Handled By: {{ task.staffName }}</p>
+              <p class="text-muted mb-1">Created At: {{ task.createdAt }}</p>
+              <p v-if="task.completedAt" class="text-muted mb-1">
+                Completed At: {{ task?.completedAt }}
+              </p>
               <span
                 class="badge"
                 :class="{
@@ -68,6 +72,8 @@ const groupedJourneys = journeys.reduce((acc, journey) => {
       title: journey.task.title,
       staffName: staff ? staff.name : 'Unassigned',
       status: journey.status,
+      createdAt: new Date(journey.createdAt).toLocaleDateString(),
+      completedAt: journey.completedAt ? new Date(journey.completedAt).toLocaleDateString() : null,
     })
   }
   return acc
