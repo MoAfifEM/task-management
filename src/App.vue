@@ -169,14 +169,19 @@ function startAutoTaskNotification() {
       return
     }
 
+    // Pick a random staff for the task
+    const staff = staffs[Math.floor(Math.random() * staffs.length)]
     const task = workflow.tasks[Math.floor(Math.random() * workflow.tasks.length)]
-    const msg = `A new task "${task.title}" for workflow "${workflow.name}" has been assigned to you for patient "${patient.fullName}".`
 
-    window.dispatchEvent(
-      new CustomEvent('global-notification', {
-        detail: msg,
-      }),
-    )
+    // Only notify if assigned staff is the current user
+    if (staff.id === currentUser.id) {
+      const msg = `A new task "${task.title}" for workflow "${workflow.name}" has been assigned to you for patient "${patient.fullName}".`
+      window.dispatchEvent(
+        new CustomEvent('global-notification', {
+          detail: msg,
+        }),
+      )
+    }
     scheduleNext()
   }
 

@@ -77,6 +77,7 @@ import { patients, journeys, workflows } from '@/data/mockData'
 import { computed, ref } from 'vue'
 import PageContainer from '@/components/v2/PageContainer.vue'
 import { TaskStatus } from '@/types/enums'
+import { useAuthStore } from '@/stores/authStore'
 
 const tab = ref<'pending' | 'inprogress' | 'done'>('pending')
 // Function to handle task selection
@@ -163,7 +164,6 @@ function getNextTask(taskId: string, workflow: Workflow) {
 function generateNewTask(journeyId: string) {
   const selectedJourney = selectJourneyById(journeyId)
   const selectedWorkflow = selectWorkflowById(selectedJourney!.workflowId)
-
   const t = getNextTask(selectedJourney!.task.id, selectedWorkflow!)
 
   if (selectedJourney?.status === TaskStatus.IN_PROGRESS) {
@@ -183,12 +183,16 @@ function generateNewTask(journeyId: string) {
 
     _journeys.value.push(newJourney)
 
-    // Emit a custom event for global notification
-    window.dispatchEvent(
-      new CustomEvent('global-notification', {
-        detail: `Assigned ${selectedJourney!.staffId} to "${selectedWorkflow?.name}" for patient "${selectedJourney?.patientId}"`,
-      }),
-    )
+    // Notify only if assigned to current user
+    const currentUser = useAuthStore().user
+    if (currentUser && newJourney.staffId === currentUser.id) {
+      const patient = getPatient(newJourney.patientId)
+      window.dispatchEvent(
+        new CustomEvent('global-notification', {
+          detail: `A new task "${newJourney.task.title}" has been assigned to you for patient "${patient?.fullName || newJourney.patientId}".`,
+        }),
+      )
+    }
   } else {
     alert('No more tasks available in this workflow.')
   }
