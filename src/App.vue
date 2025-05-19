@@ -126,6 +126,7 @@ import { useProfileStore } from './stores/profileStore'
 import BottomTabBar from './components/BottomTabBar.vue'
 import { useSocket } from './composables/useSocket'
 import GlobalNotification from '@/components/notifications/Modal.vue'
+import { patients, workflows, staffs } from './data/mockData'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
@@ -148,6 +149,51 @@ const handleGlobalNotification = (e: Event) => {
   }
 }
 
+let autoNotifTimeout: number | undefined
+let demo = false
+
+function getRandomDelay() {
+  // Random delay between 5 seconds (5000ms) and 60 seconds (60000ms)
+  // return Math.floor(Math.random() * (60000 - 5000 + 1)) + 5000
+  return 2000
+}
+
+function startAutoTaskNotification() {
+  function triggerNotification() {
+    const patient = patients[Math.floor(Math.random() * patients.length)]
+    const workflow = workflows[Math.floor(Math.random() * workflows.length)]
+    const currentUser = useAuthStore().user
+
+    if (!currentUser) {
+      scheduleNext()
+      return
+    }
+
+    const task = workflow.tasks[Math.floor(Math.random() * workflow.tasks.length)]
+    const msg = `A new task "${task.title}" for workflow "${workflow.name}" has been assigned to you for patient "${patient.fullName}".`
+
+    window.dispatchEvent(
+      new CustomEvent('global-notification', {
+        detail: msg,
+      }),
+    )
+    scheduleNext()
+  }
+
+  function scheduleNext() {
+    autoNotifTimeout = window.setTimeout(triggerNotification, getRandomDelay())
+  }
+
+  scheduleNext()
+}
+
+function stopAutoTaskNotification() {
+  if (autoNotifTimeout) {
+    clearTimeout(autoNotifTimeout)
+    autoNotifTimeout = undefined
+  }
+}
+
 onMounted(() => {
   useAuthStore().loadFromStorage()
   useProfileStore().loadFromStorage()
@@ -160,10 +206,17 @@ onMounted(() => {
       }
     },
   )
+
+  if (demo) {
+    startAutoTaskNotification() // <-- Start auto notifications here
+  }
 })
 
 onUnmounted(() => {
   window.removeEventListener('global-notification', handleGlobalNotification)
+  if (demo) {
+    stopAutoTaskNotification() // <-- Stop auto notifications here
+  }
 })
 </script>
 

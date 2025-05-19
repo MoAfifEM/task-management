@@ -2,7 +2,7 @@
   <div v-if="visible" class="notification-modal-center">
     <div class="modal-content p-4">
       <h5 class="mb-3">Task Assignment</h5>
-      <ul class="mb-3">
+      <ul class="mb-3 notification-list">
         <li v-for="(msg, idx) in messages" :key="idx">{{ msg }}</li>
       </ul>
       <button type="button" class="btn btn-primary w-100" @click="close">Close</button>
@@ -19,8 +19,6 @@ const messages = ref<string[]>([])
 function show(msg: string) {
   messages.value.push(msg)
   visible.value = true
-  // Optional: auto-close after some time (remove if you want manual close only)
-  // setTimeout(() => { visible.value = false; messages.value = [] }, 5000)
 }
 
 function close() {
@@ -51,5 +49,11 @@ defineExpose({ show })
   min-width: 300px;
   max-width: 90vw;
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+}
+.notification-list {
+  max-height: 200px; /* Adjust as needed */
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding-left: 1.2rem;
 }
 </style>
