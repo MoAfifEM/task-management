@@ -73,7 +73,7 @@ const avatar =
 const data = ref(patients)
 const selectedWorkflow = ref<Workflow | null>(null)
 const router = useRouter()
-const authStore = useAuthStore()
+// const authStore = useAuthStore()
 
 function viewDetails(patient: Patient) {
   alert(`Viewing details for ${patient.fullName}`)
