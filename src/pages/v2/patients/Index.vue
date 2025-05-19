@@ -209,7 +209,7 @@ function selectWorkflow(patient: Patient, workflow: Workflow) {
     alert(`Workflow "${workflow.name}" has no tasks.`)
   }
 
-  router.push({ name: 'staffJourneys' })
+  router.push({ name: 'v2Tasks' })
 }
 </script>
 

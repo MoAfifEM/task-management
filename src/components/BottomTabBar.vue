@@ -20,9 +20,9 @@
           </router-link>
         </li>
         <li class="nav-item flex-fill text-center">
-          <router-link to="/v2/profile" class="nav-link" active-class="active">
+          <router-link to="/login" class="nav-link" active-class="active">
             <i class="pi pi-user"></i>
-            <div style="font-size: 0.8em">Profile</div>
+            <div style="font-size: 0.8em">Logout</div>
           </router-link>
         </li>
       </ul>

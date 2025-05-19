@@ -77,7 +77,7 @@ export default {
           detail: `Welcome!`,
           life: 3000,
         })
-        router.push('/staff/tasks') // Replace with your dashboard route
+        router.push('/v2/tasks') // Replace with your dashboard route
       } else {
         toast.add({
           severity: 'error',
