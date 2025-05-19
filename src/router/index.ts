@@ -72,6 +72,12 @@ const router = createRouter({
       component: () => import('../pages/v2/patients/Index.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/v2/tasks',
+      name: 'v2Tasks',
+      component: () => import('../pages/v2/tasks/Index.vue'),
+      meta: { requiresAuth: true },
+    },
   ],
 })
 

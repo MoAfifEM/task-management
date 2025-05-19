@@ -18,7 +18,7 @@
     </div>
 
     <div v-if="tab == 'list'" class="patient-list-scroll">
-      <div class="card patient-card border-bottom" v-for="patient in data" :key="patient.id">
+      <div class="card patient-card border-bottom mb-2" v-for="patient in data" :key="patient.id">
         <div class="card-body py-3 px-3 d-flex align-items-center">
           <!-- Avatar Image as Link -->
           <a :href="`/patients/${patient.id}`" class="avatar-link me-3">
@@ -63,7 +63,7 @@
 
     <div v-else-if="tab == 'ward'" class="patient-list-scroll">
       <div
-        class="card patient-card border-bottom"
+        class="card patient-card border-bottom mb-2"
         v-for="patient in wardPatients"
         :key="patient.id"
       >
@@ -76,22 +76,31 @@
             />
           </a>
           <div>
-            <h5 class="card-title mb-1">{{ patient.fullName }}</h5>
+            <h5 class="card-title mb-1">
+              <i class="pi pi-user me-2 text-primary"></i>
+              {{ patient.fullName }}
+            </h5>
             <p class="card-text mb-0 text-muted">Age: {{ patient.birthDate }}</p>
             <p class="card-text mb-0 text-muted">ID: {{ patient.id }}</p>
             <template v-if="getCurrentJourney(patient)">
-              <p class="card-text mb-0">
-                <span class="badge bg-info me-1">{{ getCurrentJourney(patient).status }}</span>
-              </p>
-              <p class="card-text mb-0 text-secondary">
-                Department: {{ getCurrentJourney(patient).task.department }}
-              </p>
-              <p class="card-text mb-0 text-secondary">
-                Current Progress: {{ getCurrentJourney(patient).task.title }}
-              </p>
+              <div class="mt-3">
+                <span class="badge bg-info fs-7 px-3 py-2 mb-2">{{
+                  getCurrentJourney(patient).status
+                }}</span>
+                <div class="d-flex align-items-center text-secondary mt-2 mb-1">
+                  <i
+                    :class="getDepartmentIcon(getCurrentJourney(patient).task.department) + ' me-2'"
+                  ></i>
+                  {{ getCurrentJourney(patient).task.department }}
+                </div>
+                <div class="mb-1 text-secondary">
+                  <span class="fw-bold">in progress:</span>
+                  <span>{{ getCurrentJourney(patient).task.title }}</span>
+                </div>
+              </div>
             </template>
             <template v-else>
-              <p class="card-text mb-0 text-warning">No active task</p>
+              <p class="card-text mb-0 text-warning mt-3">No active task</p>
             </template>
           </div>
         </div>
@@ -128,6 +137,33 @@ const wardPatients = computed(() =>
     return !!journey
   }),
 )
+
+function getDepartmentIcon(department: string) {
+  switch (department) {
+    case 'NURSING':
+      return 'pi pi-user-plus'
+    case 'PHYSIOTHERAPY':
+      return 'pi pi-heart'
+    case 'RADIOLOGY':
+      return 'pi pi-camera'
+    case 'CARDIOLOGY':
+      return 'pi pi-heart-fill'
+    case 'DERMATOLOGY':
+      return 'pi pi-star'
+    case 'GYNECOLOGY':
+      return 'pi pi-users'
+    case 'NEUROLOGY':
+      return 'pi pi-bolt'
+    case 'ORTHOPEDICS':
+      return 'pi pi-inbox'
+    case 'PEDIATRICS':
+      return 'pi pi-user'
+    case 'ADMINISTRATION':
+      return 'pi pi-briefcase'
+    default:
+      return 'pi pi-building'
+  }
+}
 
 function getCurrentJourney(patient: Patient) {
   return _journeys.value
@@ -215,11 +251,7 @@ function selectWorkflow(patient: Patient, workflow: Workflow) {
 }
 
 .patient-card {
-  border-radius: 0;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  margin: 0 5px;
+  border-radius: 0.5rem;
   background: #fff;
 }
 .avatar-link {
