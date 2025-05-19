@@ -28,20 +28,6 @@
                 placeholder="Enter workflow description"
               ></textarea>
             </div>
-            <div class="mb-3">
-              <label for="workflowDepartment" class="form-label">Department</label>
-              <select
-                id="workflowDepartment"
-                v-model="form.department"
-                class="form-select"
-                required
-              >
-                <option value="" disabled>Select a department</option>
-                <option value="HR">HR</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Marketing">Marketing</option>
-              </select>
-            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" @click="$emit('close')">Cancel</button>
@@ -75,7 +61,6 @@ const form = reactive<Workflow>({
   name: '',
   description: '',
   tasks: [],
-  department: '' as Department,
 })
 
 const isEditMode = computed(() => !!props.initialData?.id)
@@ -87,12 +72,10 @@ watch(
       form.name = data.name
       form.description = data.description || ''
       form.tasks = data.tasks
-      form.department = data.department
     } else {
       form.name = ''
       form.description = ''
       form.tasks = []
-      form.department = '' as Department
     }
   },
   { immediate: true },

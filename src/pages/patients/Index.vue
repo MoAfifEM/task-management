@@ -65,6 +65,7 @@ import type { Patient } from '../../types/models'
 import type { Journey } from '../../types/models'
 import { TaskStatus } from '@/types/enums'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
 
 const avatar =
   'https://cdna.artstation.com/p/assets/images/images/038/652/346/large/joe-parente-joji-pink-guy-comp-01.jpg?1623691200' // Placeholder avatar URL
@@ -72,6 +73,7 @@ const avatar =
 const data = ref(patients)
 const selectedWorkflow = ref<Workflow | null>(null)
 const router = useRouter()
+const authStore = useAuthStore()
 
 function viewDetails(patient: Patient) {
   alert(`Viewing details for ${patient.fullName}`)
@@ -90,18 +92,34 @@ function selectWorkflow(patient: Patient, workflow: Workflow) {
     // Randomly pick a staff member for the task
     const randomStaff = staffs[Math.floor(Math.random() * staffs.length)]
 
+    // Use current user as staff for testing
+    // const currentUser = authStore.user
+    // if (!currentUser) {
+    //   alert('No current user logged in!')
+    //   return
+    // }
+
     const newJourney: Journey = {
       id: `journey-${Date.now()}-${firstTask.id}`, // Unique ID for the journey
       patientId: patient.id,
       workflowId: workflow.id,
       status: TaskStatus.PENDING,
       task: firstTask, // Assign the first task
+      // staffId: currentUser.id, // Assign a randomly selected staff
       staffId: randomStaff.id, // Assign a randomly selected staff
       createdAt: new Date().toISOString(),
     }
 
     journeys.push(newJourney) // Add the new journey to the journeys array
-    alert(`Added first task of workflow "${workflow.name}" for patient "${patient.fullName}"`)
+    // alert(`Added first task of workflow "${workflow.name}" for patient "${patient.fullName}"`)
+
+    // Emit a custom event for global notification
+    window.dispatchEvent(
+      new CustomEvent('global-notification', {
+        // detail: `Assigned ${currentUser.name} to "${workflow.name}" for patient "${patient.fullName}"`,
+        detail: `Assigned ${randomStaff.name} to "${workflow.name}" for patient "${patient.fullName}"`,
+      }),
+    )
   } else {
     alert(`Workflow "${workflow.name}" has no tasks.`)
   }

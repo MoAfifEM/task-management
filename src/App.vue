@@ -2,6 +2,7 @@
   <div id="app" class="d-flex flex-column min-vh-100">
     <!-- Toast (Global) -->
     <Toast />
+    <GlobalNotification ref="globalNotify" />
 
     <!-- Mobile Layout -->
     <template v-if="isStaffPage">
@@ -116,13 +117,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import Toast from 'primevue/toast'
 import SidebarLinks from './components/SidebarLinks.vue'
 import { useAuthStore } from './stores/authStore'
 import { useProfileStore } from './stores/profileStore'
 import BottomTabBar from './components/BottomTabBar.vue'
+import { useSocket } from './composables/useSocket'
+import GlobalNotification from '@/components/notifications/Modal.vue'
 
 const sidebarOpen = ref(false)
 const route = useRoute()
@@ -135,9 +138,32 @@ const isAuthPage = computed(() => noLayoutRoutes.includes(route.path))
 const isStaffPage = computed(() => route.path.startsWith('/staff'))
 const isV2Page = computed(() => route.path.startsWith('/v2'))
 
+const globalNotify = ref()
+const { data: notification } = useSocket('notification')
+
+const handleGlobalNotification = (e: Event) => {
+  const detail = (e as CustomEvent).detail
+  if (globalNotify.value && detail) {
+    globalNotify.value.show(detail)
+  }
+}
+
 onMounted(() => {
   useAuthStore().loadFromStorage()
   useProfileStore().loadFromStorage()
+  window.addEventListener('global-notification', handleGlobalNotification)
+  watch(
+    () => notification.value,
+    (val) => {
+      if (val && globalNotify.value) {
+        globalNotify.value.show(val)
+      }
+    },
+  )
+})
+
+onUnmounted(() => {
+  window.removeEventListener('global-notification', handleGlobalNotification)
 })
 </script>
 
