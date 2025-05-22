@@ -185,8 +185,12 @@ function selectWorkflow(patient: Patient, workflow: Workflow) {
 
   const firstTask = workflow.tasks[0]
   if (firstTask) {
+    // select the staff under the same task department
+    const staffInDepartment = staffs.filter((staff) => staff.department === firstTask.department)
     // Randomly pick a staff member for the task
-    const randomStaff = staffs[Math.floor(Math.random() * staffs.length)]
+    // if (staffInDepartment.length > 0) {
+    //   const randomStaff = staffInDepartment[Math.floor(Math.random() * staffInDepartment.length)]
+    // }
 
     const newJourney: Journey = {
       id: `journey-${Date.now()}-${firstTask.id}`,
@@ -194,7 +198,7 @@ function selectWorkflow(patient: Patient, workflow: Workflow) {
       workflowId: workflow.id,
       status: TaskStatus.PENDING,
       task: firstTask,
-      staffId: randomStaff.id,
+      staffId: staffInDepartment[0].id,
       createdAt: new Date().toISOString(),
     }
     journeys.push(newJourney)
@@ -202,7 +206,7 @@ function selectWorkflow(patient: Patient, workflow: Workflow) {
     // Emit a custom event for global notification
     window.dispatchEvent(
       new CustomEvent('global-notification', {
-        detail: `Assigned ${randomStaff.name} to "${workflow.name}" for patient "${patient.fullName}"`,
+        detail: `Assigned ${staffInDepartment[0].name} to "${workflow.name}" for patient "${patient.fullName}"`,
       }),
     )
   } else {

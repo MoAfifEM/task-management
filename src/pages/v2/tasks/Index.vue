@@ -54,6 +54,9 @@
                 <button class="btn btn-sm btn-info me-2" @click="markInProgress(journey.id)">
                   In Progress
                 </button>
+                <button class="btn btn-sm btn-danger me-2" @click="openAssignModal(journey)">
+                  Assigned
+                </button>
                 <!-- <button class="btn btn-sm btn-success" @click="markDone(journey.id)">Done</button> -->
               </template>
               <template v-else-if="journey.status === TaskStatus.IN_PROGRESS">
@@ -68,12 +71,48 @@
         No tasks found for this status.
       </div>
     </div>
+
+    <!-- Assign Staff Modal -->
+    <div
+      class="modal fade"
+      tabindex="-1"
+      :class="{ show: showAssignModal }"
+      style="display: block"
+      v-if="showAssignModal"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Assign Staff</h5>
+            <button type="button" class="btn-close" @click="closeAssignModal"></button>
+          </div>
+          <div class="modal-body">
+            <div v-if="assignStaffList.length === 0" class="text-muted">
+              No staff found in this department.
+            </div>
+            <ul class="list-group">
+              <li
+                v-for="staff in assignStaffList"
+                :key="staff.id"
+                class="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span>{{ staff.name }}</span>
+                <button class="btn btn-sm btn-primary" @click="assignStaffToJourney(staff.id)">
+                  Assign
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="showAssignModal" class="modal-backdrop fade show"></div>
   </PageContainer>
 </template>
 
 <script setup lang="ts">
 import type { Journey, Patient, Workflow } from '@/types/models'
-import { patients, journeys, workflows } from '@/data/mockData'
+import { patients, journeys, workflows, staffs } from '@/data/mockData'
 import { computed, ref } from 'vue'
 import PageContainer from '@/components/v2/PageContainer.vue'
 import { TaskStatus } from '@/types/enums'
@@ -84,16 +123,27 @@ const tab = ref<'pending' | 'inprogress' | 'done'>('pending')
 const _journeys = ref<Journey[]>(journeys)
 
 const filteredJourneys = computed(() => {
-  if (tab.value === 'pending') {
-    return _journeys.value.filter((j) => j.status === TaskStatus.PENDING)
+  const currentUser = useAuthStore().user
+  if (currentUser) {
+    if (tab.value === 'pending') {
+      // filter by current user
+      // if no user, return all pending tasks
+      return _journeys.value.filter(
+        (j) => j.status === TaskStatus.PENDING && j.staffId === currentUser.id,
+      )
+    }
+    if (tab.value === 'inprogress') {
+      return _journeys.value.filter(
+        (j) => j.status === TaskStatus.IN_PROGRESS && j.staffId === currentUser.id,
+      )
+    }
+    // done tab
+    return _journeys.value.filter(
+      (j) => j.status === TaskStatus.DONE && j.staffId === currentUser.id,
+    )
   }
-  if (tab.value === 'inprogress') {
-    return _journeys.value.filter((j) => j.status === TaskStatus.IN_PROGRESS)
-  }
-  // done tab
-  return _journeys.value.filter(
-    (j) => j.status === TaskStatus.DONE || j.status === TaskStatus.COMPLETED,
-  )
+  // if no user, return all tasks
+  return _journeys.value.filter((j) => j.status === tab.value.toUpperCase())
 })
 
 function getPatient(patientId: string): Patient | undefined {
@@ -161,7 +211,7 @@ function getNextTask(taskId: string, workflow: Workflow) {
   return null
 }
 
-function generateNewTask(journeyId: string) {
+function generateNewTask(journeyId: string, staffId?: string) {
   const selectedJourney = selectJourneyById(journeyId)
   const selectedWorkflow = selectWorkflowById(selectedJourney!.workflowId)
   const t = getNextTask(selectedJourney!.task.id, selectedWorkflow!)
@@ -177,7 +227,7 @@ function generateNewTask(journeyId: string) {
       workflowId: selectedJourney!.workflowId,
       status: TaskStatus.PENDING,
       task: t,
-      staffId: selectedJourney!.staffId,
+      staffId: staffId ?? selectedJourney!.staffId,
       createdAt: new Date().toISOString(),
     }
 
@@ -194,7 +244,7 @@ function generateNewTask(journeyId: string) {
       )
     }
   } else {
-    alert('No more tasks available in this workflow.')
+    // alert('No more tasks available in this workflow.')
   }
 }
 
@@ -216,6 +266,37 @@ function markDone(journeyId: string) {
   }
   generateNewTask(journeyId)
   alert(`Task "${selectedJourney!.task.title}" marked as Done.`)
+}
+
+const showAssignModal = ref(false)
+const selectedJourneyForAssign = ref<Journey | null>(null)
+const assignStaffList = ref([] as typeof staffs)
+
+function openAssignModal(journey: Journey) {
+  selectedJourneyForAssign.value = journey
+  assignStaffList.value = staffs.filter((s) => s.department === journey.task.department)
+  showAssignModal.value = true
+}
+
+function closeAssignModal() {
+  showAssignModal.value = false
+  selectedJourneyForAssign.value = null
+  assignStaffList.value = []
+}
+
+function assignStaffToJourney(staffId: string) {
+  if (selectedJourneyForAssign.value) {
+    selectedJourneyForAssign.value.staffId = staffId
+
+    // update the selected journey into array
+    const index = _journeys.value.findIndex((j) => j.id === selectedJourneyForAssign.value!.id)
+    if (index !== -1) {
+      _journeys.value[index] = selectedJourneyForAssign.value!
+    }
+
+    alert('Staff assigned!')
+    closeAssignModal()
+  }
 }
 </script>
 

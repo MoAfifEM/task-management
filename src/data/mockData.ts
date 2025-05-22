@@ -3,54 +3,7 @@ import type { Staff, Patient, Task, Workflow, Journey } from '../types/models'
 
 // --- Staff ---
 export const staffs: Staff[] = [
-  {
-    id: 'staff-001',
-    username: 'alice.nurse',
-    password: 'admin123',
-    name: 'Alice Tan',
-    contactNo: '+60123456789',
-    department: Department.NURSING,
-  },
-  {
-    id: 'staff-002',
-    username: 'bob.physio',
-    password: 'admin123',
-    name: 'Bob Lee',
-    contactNo: '+60198765432',
-    department: Department.PHYSIOTHERAPY,
-  },
-  {
-    id: 'staff-003',
-    username: 'chloe.radio',
-    password: 'admin123',
-    name: 'Chloe Lim',
-    contactNo: '+60199887766',
-    department: Department.RADIOLOGY,
-  },
-  {
-    id: 'staff-004',
-    username: 'david.cardiology',
-    password: 'admin123',
-    name: 'David Wong',
-    contactNo: '+60123456788',
-    department: Department.CARDIOLOGY,
-  },
-  {
-    id: 'staff-005',
-    username: 'emma.dermatology',
-    password: 'admin123',
-    name: 'Emma Tan',
-    contactNo: '+60134567891',
-    department: Department.DERMATOLOGY,
-  },
-  {
-    id: 'staff-006',
-    username: 'fiona.gynecology',
-    password: 'admin123',
-    name: 'Fiona Lee',
-    contactNo: '+60145678902',
-    department: Department.GYNECOLOGY,
-  },
+  // ADMINISTRATION
   {
     id: 'admin-001',
     username: 'admin',
@@ -58,6 +11,256 @@ export const staffs: Staff[] = [
     name: 'Mo Afif',
     contactNo: '+60199887766',
     department: Department.ADMINISTRATION,
+  },
+  {
+    id: 'admin-002',
+    username: 'sarah.admin',
+    password: 'admin123',
+    name: 'Sarah Admin',
+    contactNo: '+60199887767',
+    department: Department.ADMINISTRATION,
+  },
+  {
+    id: 'admin-003',
+    username: 'john.admin',
+    password: 'admin123',
+    name: 'John Admin',
+    contactNo: '+60199887768',
+    department: Department.ADMINISTRATION,
+  },
+
+  // NURSING
+  {
+    id: 'nurse-001',
+    username: 'alice.nurse',
+    password: 'admin123',
+    name: 'Alice Tan',
+    contactNo: '+60123456789',
+    department: Department.NURSING,
+  },
+  {
+    id: 'nurse-002',
+    username: 'bella.nurse',
+    password: 'admin123',
+    name: 'Bella Nurse',
+    contactNo: '+60123456790',
+    department: Department.NURSING,
+  },
+  {
+    id: 'nurse-003',
+    username: 'cindy.nurse',
+    password: 'admin123',
+    name: 'Cindy Nurse',
+    contactNo: '+60123456791',
+    department: Department.NURSING,
+  },
+
+  // HOUSEKEEPING
+  {
+    id: 'house-001',
+    username: 'bob.housekeeping',
+    password: 'admin123',
+    name: 'Bob Housekeeper',
+    contactNo: '+60123456781',
+    department: Department.HOUSEKEEPING,
+  },
+  {
+    id: 'house-002',
+    username: 'dina.housekeeping',
+    password: 'admin123',
+    name: 'Dina Housekeeper',
+    contactNo: '+60123456792',
+    department: Department.HOUSEKEEPING,
+  },
+  {
+    id: 'house-003',
+    username: 'eric.housekeeping',
+    password: 'admin123',
+    name: 'Eric Housekeeper',
+    contactNo: '+60123456793',
+    department: Department.HOUSEKEEPING,
+  },
+
+  // PORTER
+  {
+    id: 'porter-001',
+    username: 'charlie.porter',
+    password: 'admin123',
+    name: 'Charlie Porter',
+    contactNo: '+60123456782',
+    department: Department.PORTER,
+  },
+  {
+    id: 'porter-002',
+    username: 'fiona.porter',
+    password: 'admin123',
+    name: 'Fiona Porter',
+    contactNo: '+60123456794',
+    department: Department.PORTER,
+  },
+  {
+    id: 'porter-003',
+    username: 'george.porter',
+    password: 'admin123',
+    name: 'George Porter',
+    contactNo: '+60123456795',
+    department: Department.PORTER,
+  },
+
+  // DIETARY
+  {
+    id: 'diet-001',
+    username: 'diana.dietary',
+    password: 'admin123',
+    name: 'Diana Dietary',
+    contactNo: '+60123456783',
+    department: Department.DIETARY,
+  },
+  {
+    id: 'diet-002',
+    username: 'hannah.dietary',
+    password: 'admin123',
+    name: 'Hannah Dietary',
+    contactNo: '+60123456796',
+    department: Department.DIETARY,
+  },
+  {
+    id: 'diet-003',
+    username: 'ian.dietary',
+    password: 'admin123',
+    name: 'Ian Dietary',
+    contactNo: '+60123456797',
+    department: Department.DIETARY,
+  },
+
+  // PHARMACY
+  {
+    id: 'pharm-001',
+    username: 'edward.pharmacy',
+    password: 'admin123',
+    name: 'Edward Pharmacy',
+    contactNo: '+60123456784',
+    department: Department.PHARMACY,
+  },
+  {
+    id: 'pharm-002',
+    username: 'julia.pharmacy',
+    password: 'admin123',
+    name: 'Julia Pharmacy',
+    contactNo: '+60123456798',
+    department: Department.PHARMACY,
+  },
+  {
+    id: 'pharm-003',
+    username: 'kevin.pharmacy',
+    password: 'admin123',
+    name: 'Kevin Pharmacy',
+    contactNo: '+60123456799',
+    department: Department.PHARMACY,
+  },
+
+  // DOCTOR
+  {
+    id: 'doc-001',
+    username: 'fiona.doctor',
+    password: 'admin123',
+    name: 'Fiona Doctor',
+    contactNo: '+60123456785',
+    department: Department.DOCTOR,
+  },
+  {
+    id: 'doc-002',
+    username: 'liam.doctor',
+    password: 'admin123',
+    name: 'Liam Doctor',
+    contactNo: '+60123456800',
+    department: Department.DOCTOR,
+  },
+  {
+    id: 'doc-003',
+    username: 'maya.doctor',
+    password: 'admin123',
+    name: 'Maya Doctor',
+    contactNo: '+60123456801',
+    department: Department.DOCTOR,
+  },
+
+  // TEAM_LEAD
+  {
+    id: 'lead-001',
+    username: 'george.teamlead',
+    password: 'admin123',
+    name: 'George TeamLead',
+    contactNo: '+60123456786',
+    department: Department.TEAM_LEAD,
+  },
+  {
+    id: 'lead-002',
+    username: 'nina.teamlead',
+    password: 'admin123',
+    name: 'Nina TeamLead',
+    contactNo: '+60123456802',
+    department: Department.TEAM_LEAD,
+  },
+  {
+    id: 'lead-003',
+    username: 'oliver.teamlead',
+    password: 'admin123',
+    name: 'Oliver TeamLead',
+    contactNo: '+60123456803',
+    department: Department.TEAM_LEAD,
+  },
+
+  // ICU_NURSING
+  {
+    id: 'icu-001',
+    username: 'hannah.icunurse',
+    password: 'admin123',
+    name: 'Hannah ICU Nurse',
+    contactNo: '+60123456787',
+    department: Department.ICU_NURSING,
+  },
+  {
+    id: 'icu-002',
+    username: 'paul.icunurse',
+    password: 'admin123',
+    name: 'Paul ICU Nurse',
+    contactNo: '+60123456804',
+    department: Department.ICU_NURSING,
+  },
+  {
+    id: 'icu-003',
+    username: 'quinn.icunurse',
+    password: 'admin123',
+    name: 'Quinn ICU Nurse',
+    contactNo: '+60123456805',
+    department: Department.ICU_NURSING,
+  },
+
+  // PHYSIOTHERAPY
+  {
+    id: 'physio-001',
+    username: 'ian.physio',
+    password: 'admin123',
+    name: 'Ian Physio',
+    contactNo: '+60123456788',
+    department: Department.PHYSIOTHERAPY,
+  },
+  {
+    id: 'physio-002',
+    username: 'rachel.physio',
+    password: 'admin123',
+    name: 'Rachel Physio',
+    contactNo: '+60123456806',
+    department: Department.PHYSIOTHERAPY,
+  },
+  {
+    id: 'physio-003',
+    username: 'sam.physio',
+    password: 'admin123',
+    name: 'Sam Physio',
+    contactNo: '+60123456807',
+    department: Department.PHYSIOTHERAPY,
   },
 ]
 
@@ -147,170 +350,175 @@ export const patients: Patient[] = [
 
 // --- Tasks (template) ---
 export const tasks: Task[] = [
+  // Patient Admission to Ward
   {
-    id: 'task-001',
-    title: 'Check Vital Signs',
-    description: 'Monitor and record temperature, pulse, and blood pressure.',
+    id: 'task-009',
+    title: 'Check for room availability',
+    department: Department.ADMINISTRATION,
+  },
+  {
+    id: 'task-010',
+    title: 'Room preparation (water, blanket, pillow, sanitary items)',
+    department: Department.HOUSEKEEPING,
+  },
+  {
+    id: 'task-011',
+    title: 'Inform nurse of patient arrival to room',
     department: Department.NURSING,
   },
   {
-    id: 'task-002',
-    title: 'Wound Dressing',
-    description: 'Clean and dress surgical wound.',
+    id: 'task-012',
+    title: 'Request porter to bring patient to room',
+    department: Department.PORTER,
+  },
+  {
+    id: 'task-013',
+    title: 'Perform orientation & assessment checklist (vitals, skin check, fall risk)',
     department: Department.NURSING,
   },
   {
-    id: 'task-003',
-    title: 'Stretching Exercise',
-    description: 'Assisted stretching to improve range of motion.',
+    id: 'task-014',
+    title: 'Meal plan setup (based on allergies, needs)',
+    department: Department.DIETARY,
+  },
+
+  // Post-Operative Transfer from OT
+  {
+    id: 'task-015',
+    title: 'Immediate post-op vitals and neuro observations',
+    department: Department.NURSING,
+  },
+  {
+    id: 'task-016',
+    title: 'Pain assessment & documentation',
+    department: Department.NURSING,
+  },
+  {
+    id: 'task-017',
+    title: 'Surgical wound care plan task',
+    department: Department.NURSING,
+  },
+  {
+    id: 'task-018',
+    title: 'Resume/initiate post-op medications',
+    department: Department.PHARMACY,
+  },
+  {
+    id: 'task-019',
+    title: 'Doctor review and write progress notes',
+    department: Department.DOCTOR,
+  },
+  {
+    id: 'task-020',
+    title: 'Resume feeding order based on NPO status',
+    department: Department.DIETARY,
+  },
+
+  // Deterioration During Night Shift
+  {
+    id: 'task-021',
+    title: 'Escalation checklist triggered after trend detection',
+    department: Department.NURSING,
+  },
+  {
+    id: 'task-022',
+    title: 'Team Lead review patient',
+    department: Department.TEAM_LEAD,
+  },
+  {
+    id: 'task-023',
+    title: 'Doctor notified with vital trends and SBAR',
+    department: Department.DOCTOR,
+  },
+  {
+    id: 'task-024',
+    title: 'ICU Nurse pre-alert for preparation/standby',
+    department: Department.ICU_NURSING,
+  },
+
+  // Discharge Planned
+  {
+    id: 'task-025',
+    title: 'Begin discharge checklist (IV removal, wound education, etc.)',
+    department: Department.NURSING,
+  },
+  {
+    id: 'task-026',
+    title: 'Reconcile meds and prepare discharge prescriptions',
+    department: Department.PHARMACY,
+  },
+  {
+    id: 'task-027',
+    title: 'Final mobility check or home exercise plan',
     department: Department.PHYSIOTHERAPY,
   },
   {
-    id: 'task-004',
-    title: 'Muscle Strength Training',
-    description: 'Exercises focused on rebuilding muscle strength.',
-    department: Department.PHYSIOTHERAPY,
+    id: 'task-028',
+    title: 'Schedule caregiver/family education',
+    department: Department.NURSING,
   },
   {
-    id: 'task-005',
-    title: 'X-ray Scan',
-    description: 'Chest and abdomen X-ray.',
-    department: Department.RADIOLOGY,
-  },
-  {
-    id: 'task-006',
-    title: 'Cardiac Stress Test',
-    description: 'Monitor heart activity during physical exertion.',
-    department: Department.CARDIOLOGY,
-  },
-  {
-    id: 'task-007',
-    title: 'Skin Allergy Test',
-    description: 'Identify allergic reactions to various substances.',
-    department: Department.DERMATOLOGY,
-  },
-  {
-    id: 'task-008',
-    title: 'Prenatal Ultrasound',
-    description: 'Monitor fetal development and maternal health.',
-    department: Department.GYNECOLOGY,
+    id: 'task-029',
+    title: 'Schedule terminal cleaning',
+    department: Department.HOUSEKEEPING,
   },
 ]
 
 // --- Workflows ---
 export const workflows: Workflow[] = [
+  // ...existing workflows...
   {
-    id: 'workflow-001',
-    name: 'Post-Surgery Care',
-    description: 'Follow-up nursing tasks after surgery',
-    tasks: [tasks[0], tasks[1]],
+    id: 'workflow-005',
+    name: 'Patient Admission to Ward',
+    description: 'Triggered when patient is admitted from A&E.',
+    tasks: [
+      tasks.find((t) => t.id === 'task-009')!,
+      tasks.find((t) => t.id === 'task-010')!,
+      tasks.find((t) => t.id === 'task-011')!,
+      tasks.find((t) => t.id === 'task-012')!,
+      tasks.find((t) => t.id === 'task-013')!,
+      tasks.find((t) => t.id === 'task-014')!,
+    ],
   },
   {
-    id: 'workflow-002',
-    name: 'Rehabilitation Program',
-    description: 'Daily physiotherapy sessions',
-    tasks: [tasks[2], tasks[3]],
+    id: 'workflow-006',
+    name: 'Post-Operative Transfer from OT',
+    description: 'Triggered when patient arrives in ward after surgery.',
+    tasks: [
+      tasks.find((t) => t.id === 'task-015')!,
+      tasks.find((t) => t.id === 'task-016')!,
+      tasks.find((t) => t.id === 'task-017')!,
+      tasks.find((t) => t.id === 'task-018')!,
+      tasks.find((t) => t.id === 'task-019')!,
+      tasks.find((t) => t.id === 'task-020')!,
+    ],
   },
   {
-    id: 'workflow-003',
-    name: 'Radiology Checkup',
-    description: 'Routine imaging procedures',
-    tasks: [tasks[4]],
+    id: 'workflow-007',
+    name: 'Deterioration During Night Shift',
+    description: 'Triggered when patient vitals gradually worsen over shift.',
+    tasks: [
+      tasks.find((t) => t.id === 'task-021')!,
+      tasks.find((t) => t.id === 'task-022')!,
+      tasks.find((t) => t.id === 'task-023')!,
+      tasks.find((t) => t.id === 'task-024')!,
+    ],
   },
   {
-    id: 'workflow-004',
-    name: 'Specialized Care',
-    description: 'Comprehensive care involving cardiology, dermatology, and gynecology',
-    tasks: [tasks[5], tasks[6], tasks[7]],
+    id: 'workflow-008',
+    name: 'Discharge Planned',
+    description: 'Triggered when doctor confirms patient can be discharged.',
+    tasks: [
+      tasks.find((t) => t.id === 'task-025')!,
+      tasks.find((t) => t.id === 'task-026')!,
+      tasks.find((t) => t.id === 'task-027')!,
+      tasks.find((t) => t.id === 'task-028')!,
+      tasks.find((t) => t.id === 'task-029')!,
+    ],
   },
 ]
 
 // --- Journeys (current task + assigned staff) ---
 export const journeys: Journey[] = [
-  {
-    id: 'journey-001',
-    patientId: 'patient-001',
-    workflowId: 'workflow-001',
-    status: TaskStatus.DONE,
-    task: {
-      id: 'task-001',
-      title: 'Check Vital Signs',
-      description: 'Monitor and record temperature, pulse, and blood pressure.',
-      department: Department.NURSING,
-    },
-    staffId: 'staff-001', // Alice from NURSING
-    createdAt: '2025-05-01T08:00:00Z',
-    completedAt: '2025-05-01T09:00:00Z',
-  },
-  {
-    id: 'journey-002',
-    patientId: 'patient-001',
-    workflowId: 'workflow-001',
-    status: TaskStatus.PENDING,
-    task: {
-      id: 'task-002',
-      title: 'Wound Dressing',
-      description: 'Clean and dress surgical wound.',
-      department: Department.NURSING,
-    },
-    staffId: 'staff-001', // Alice from NURSING
-    createdAt: '2025-05-02T10:00:00Z',
-  },
-  {
-    id: 'journey-003',
-    patientId: 'patient-002',
-    workflowId: 'workflow-002',
-    status: TaskStatus.DONE,
-    task: {
-      id: 'task-003',
-      title: 'Stretching Exercise',
-      description: 'Assisted stretching to improve range of motion.',
-      department: Department.PHYSIOTHERAPY,
-    },
-    staffId: 'staff-002', // Bob from PHYSIOTHERAPY
-    createdAt: '2025-05-03T11:00:00Z',
-    completedAt: '2025-05-03T12:00:00Z',
-  },
-  {
-    id: 'journey-004',
-    patientId: 'patient-002',
-    workflowId: 'workflow-002',
-    status: TaskStatus.PENDING,
-    task: {
-      id: 'task-004',
-      title: 'Muscle Strength Training',
-      description: 'Exercises focused on rebuilding muscle strength.',
-      department: Department.PHYSIOTHERAPY,
-    },
-    staffId: 'staff-002', // Bob from PHYSIOTHERAPY
-    createdAt: '2025-05-04T13:00:00Z',
-  },
-  {
-    id: 'journey-005',
-    patientId: 'patient-003',
-    workflowId: 'workflow-003',
-    status: TaskStatus.PENDING,
-    task: {
-      id: 'task-005',
-      title: 'X-ray Scan',
-      description: 'Chest and abdomen X-ray.',
-      department: Department.RADIOLOGY,
-    },
-    staffId: 'staff-003', // Chloe from RADIOLOGY
-    createdAt: '2025-05-05T14:00:00Z',
-  },
-  {
-    id: 'journey-006',
-    patientId: 'patient-004',
-    workflowId: 'workflow-004',
-    status: TaskStatus.PENDING,
-    task: {
-      id: 'task-006',
-      title: 'Cardiac Stress Test',
-      description: 'Monitor heart activity during physical exertion.',
-      department: Department.CARDIOLOGY,
-    },
-    staffId: 'staff-004', // David Wong from CARDIOLOGY
-    createdAt: '2025-05-06T15:00:00Z',
-  },
+  // Journeys
 ]
