@@ -17,54 +17,6 @@ const router = createRouter({
       component: () => import('../pages/dashboard/Index.vue'),
       meta: { requiresAuth: false },
     },
-    // {
-    //   path: '/patients',
-    //   name: 'patients',
-    //   component: () => import('../pages/patients/Index.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/tasks',
-    //   name: 'tasks',
-    //   component: () => import('../pages/tasks/Index.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/workflows',
-    //   name: 'workflows',
-    //   component: () => import('../pages/workflows/Index.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/journeys',
-    //   name: 'journeys',
-    //   component: () => import('../pages/journeys/Index.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/staff/tasks',
-    //   name: 'staffTasks',
-    //   component: () => import('../pages/staff/MyTask.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/staff/plans',
-    //   name: 'staffPlans',
-    //   component: () => import('../pages/staff/TaskPlan.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/staff/journeys',
-    //   name: 'staffJourneys',
-    //   component: () => import('../pages/staff/Journey.vue'),
-    //   meta: { requiresAuth: true },
-    // },
-    // {
-    //   path: '/staff/patients',
-    //   name: 'staffPatients',
-    //   component: () => import('../pages/patients/Index.vue'),
-    //   meta: { requiresAuth: true },
-    // },
     // V2 style
     {
       path: '/v2/patients',
