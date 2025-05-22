@@ -6,14 +6,6 @@ export const staffs: Staff[] = [
   // ADMINISTRATION
   {
     id: 'admin-001',
-    username: 'admin',
-    password: 'admin',
-    name: 'Mo Afif',
-    contactNo: '+60199887766',
-    department: Department.ADMINISTRATION,
-  },
-  {
-    id: 'admin-002',
     username: 'sarah.admin',
     password: 'admin123',
     name: 'Sarah Admin',
@@ -21,11 +13,19 @@ export const staffs: Staff[] = [
     department: Department.ADMINISTRATION,
   },
   {
-    id: 'admin-003',
+    id: 'admin-002',
     username: 'john.admin',
     password: 'admin123',
     name: 'John Admin',
     contactNo: '+60199887768',
+    department: Department.ADMINISTRATION,
+  },
+  {
+    id: 'admin-003',
+    username: 'admin',
+    password: 'admin',
+    name: 'Mo Afif',
+    contactNo: '+60199887766',
     department: Department.ADMINISTRATION,
   },
 
